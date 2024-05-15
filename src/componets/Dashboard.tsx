@@ -1,11 +1,8 @@
 import { useLocation } from "react-router-dom"
 
-interface LocationState {
-    role: string
-}
 
 const Dashboard = () => {
-    const location = useLocation<LocationState>()
+    const location = useLocation()
     const { role } = location.state || { role: "guest" }
   return (
     <div>
