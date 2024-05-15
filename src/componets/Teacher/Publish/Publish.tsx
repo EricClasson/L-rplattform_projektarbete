@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { p_assignment } from "../../../../firebase";
 import { addDoc } from "firebase/firestore";
+import uniqid from "uniqid";
 
-interface Publish {
+export interface PublishDoc {
+  id: "";
   title: string;
   information: string;
   option: string;
+  date: string;
 }
 
-export default function Assignment() {
+export default function Publish() {
   const [title, setTitle] = useState<string>("");
   const [information, setInformation] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState("");
@@ -20,10 +23,12 @@ export default function Assignment() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const data: Publish = {
+    const dateString = new Date().toISOString();
+    const data: PublishDoc = {
       title: title,
       information: information,
       option: selectedOption,
+      date: dateString,
     };
 
     try {
