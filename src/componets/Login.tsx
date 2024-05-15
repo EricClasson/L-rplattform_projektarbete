@@ -8,7 +8,7 @@ import { doc, getDoc } from "firebase/firestore";
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  
   const navigate = useNavigate();
   // Login function
   const login = async () => {
@@ -30,7 +30,6 @@ const Login = () => {
         console.log("user data",userData?.role);
       }
     } catch (error ) {
-      
       console.log(error);
     }
   };
@@ -51,7 +50,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={login}>Login</button>
-      <div>{error}</div>
+      
     </div>
   );
 };
