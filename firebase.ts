@@ -14,3 +14,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const p_formCollection = collection(db, "test");
+export const p_assignment = collection(db, "Assignments");
