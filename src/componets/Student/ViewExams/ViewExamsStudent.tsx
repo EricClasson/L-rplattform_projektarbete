@@ -1,14 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { collection, onSnapshot, doc } from "firebase/firestore";
-import { db } from "../../../firebase";
-import { PublishDoc } from "../Teacher/Publish/Publish";
+import { db } from "../../../../firebase";
+import { PublishDoc } from "../../Teacher/Publish/Publish";
 
-const Student = () => {
+const ViewExamsStudent = () => {
   const [Assignments, setAssignment] = useState<PublishDoc[]>([]);
 
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, "Assignments"), (snapshot) => {
+    const unsub = onSnapshot(collection(db, "p_Exams"), (snapshot) => {
       const Publish: PublishDoc[] = snapshot.docs.map((doc) => ({
         ...(doc.data() as PublishDoc),
         id: doc.id,
@@ -20,7 +20,7 @@ const Student = () => {
 
   return (
     <div className="flex flex-col ">
-      <h2 className="text-center">Assignment</h2>
+      <h2 className="text-center">Exams</h2>
       <ul className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
         {Assignments.map((index) => (
           <li
@@ -41,4 +41,4 @@ const Student = () => {
   );
 };
 
-export default Student;
+export default ViewExamsStudent;

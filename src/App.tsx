@@ -1,20 +1,25 @@
-import { useState } from "react";
-
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Test from "./componets/Test";
 import Publish from "./componets/Teacher/Publish/Publish";
-import Student from "./componets/Student/Student";
-import ViewPublish from "./componets/Teacher/Publish/ViewPublish";
+import ViewExams from "./componets/Teacher/ViewPublish/ViewExams";
+import ViewAssignments from "./componets/Teacher/ViewPublish/ViewAssignments";
+import ViewExamsStudent from "./componets/Student/ViewExams/ViewExamsStudent";
+import ViewAssignmentsStudent from "./componets/Student/ViewAssingments/ViewAssignmentsStudent";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/hello" element={<Test />} />
-        <Route path="/Assignment" element={<Publish />} />
-        <Route path="/GetAssignmentStudent" element={<Student />} />
-        <Route path="/GetAssignmentTeacher" element={<ViewPublish />} />
+        <Route path="/Publish" element={<Publish />} />
+        <Route path="/GetExamsStudent" element={<ViewExamsStudent />} />
+        <Route
+          path="/GetAssignmentsStudent"
+          element={<ViewAssignmentsStudent />}
+        />
+        <Route path="/GetAssignmentsTeacher" element={<ViewAssignments />} />
+        <Route path="/GetExamsTeacher" element={<ViewExams />} />
       </Routes>
     </>
   );

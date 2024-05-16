@@ -4,11 +4,11 @@ import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { PublishDoc } from "../Publish/Publish";
 
-export default function ViewPublish() {
+export default function ViewExams() {
   const [Assignments, setAssignment] = useState<PublishDoc[]>([]);
 
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, "Assignments"), (snapshot) => {
+    const unsub = onSnapshot(collection(db, "p_Exams"), (snapshot) => {
       const Publish: PublishDoc[] = snapshot.docs.map((doc) => ({
         ...(doc.data() as PublishDoc),
         id: doc.id,
@@ -24,7 +24,7 @@ export default function ViewPublish() {
 
   return (
     <div className="flex flex-col ">
-      <h2 className="text-center">Assignment</h2>
+      <h2 className="text-center">Exams</h2>
       <ul className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
         {Assignments.map((index) => (
           <li

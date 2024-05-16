@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { p_assignment } from "../../../../firebase";
+import { p_assignment, p_exams } from "../../../../firebase";
 import { addDoc } from "firebase/firestore";
-import uniqid from "uniqid";
 
 export interface PublishDoc {
   id: "";
@@ -30,14 +29,18 @@ export default function Publish() {
       option: selectedOption,
       date: dateString,
     };
-
     try {
-      await addDoc(p_assignment, data);
+      if (selectedOption === "Exam") {
+        await addDoc(p_exams, data);
+      } else {
+        await addDoc(p_assignment, data);
+      }
       setTitle("");
       setInformation("");
-      console.log("ok");
+      setSelectedOption("");
+      console.log("Document successfully written!");
     } catch (error) {
-      console.log(error);
+      console.error("Error writing document: ", error);
     }
   };
 
