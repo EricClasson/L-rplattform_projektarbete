@@ -1,7 +1,9 @@
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, User } from 'firebase/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { db, usersCollection } from '../../firebase';
+import { addDoc, collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
 
 interface FormData {
     email: string;
@@ -28,32 +30,81 @@ function Register() {
 
     const handleRegister = async () => {
         try {
-            await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-            toast('Successfully created the user!', {
-                className: 'bg-green-100 flex items-center',
-                duration: 5000,
-                icon: (
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                        />
-                    </svg>
-                ),
-            });
+            const userCredentials = await createUserWithEmailAndPassword(
+                auth,
+                formData.email,
+                formData.password
+            );
+            const user = userCredentials.user;
+
+            // cLwo1qT9zgXfp4vWfuoiflwE1CW2
+
+            // document.get.exams(studentId)
+
+            if (user) {
+                const userData: NewUser = {
+                    uid: user.uid,
+                    email: user.email,
+                    role: 'student',
+                };
+
+                await addDoc(collection(db, 'users'), userData);
+                console.log('document was created', userData.role);
+                toast('Successfully created the user!', {
+                    className: 'bg-green-100 flex items-center',
+                    duration: 5000,
+                    icon: (
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                            />
+                        </svg>
+                    ),
+                });
+            }
             navigate('/');
-        } catch (error: any) {
-            setError(error.message);
+        } catch (error) {
+            console.log(error);
         }
     };
+
+    // const handleRegister = async () => {
+    //     try {
+    //         await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+    // toast('Successfully created the user!', {
+    //     className: 'bg-green-100 flex items-center',
+    //     duration: 5000,
+    //     icon: (
+    //         <svg
+    //             xmlns="http://www.w3.org/2000/svg"
+    //             fill="none"
+    //             viewBox="0 0 24 24"
+    //             strokeWidth={1.5}
+    //             stroke="currentColor"
+    //             className="w-6 h-6"
+    //         >
+    //             <path
+    //                 strokeLinecap="round"
+    //                 strokeLinejoin="round"
+    //                 d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+    //             />
+    //         </svg>
+    //     ),
+    // });
+    //         navigate('/');
+    //     } catch (error: any) {
+    //         setError(error.message);
+    //     }
+    // };
 
     return (
         <div className="w-full h-screen bg-zinc-100 flex items-center justify-center text-white">
