@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { onSnapshot, doc, getDoc, collection } from "firebase/firestore";
+import {
+  onSnapshot,
+  doc,
+  getDoc,
+  collection,
+  deleteDoc,
+} from "firebase/firestore";
 import { db, usersCollection } from "../../../firebase";
+import { useLocation, Link } from "react-router-dom";
 
 type Props = {};
 
@@ -19,14 +26,17 @@ const StudentList = (props: Props) => {
         id: doc.id,
         ...doc.data(),
       })) as Student[];
-      console.log(list);
+
       const result = list.filter((student) => student.role === "student");
       setStudentList(result);
     });
     return () => unsub();
   }, []);
 
-  console.log(studentList);
+  const handleDelete = async (id: string) => {
+    await deleteDoc(doc(db, "users", id));
+  };
+
   return (
     <div className="grid justify-items-center grid-flow-row py-10">
       <h2>StudentList</h2>
@@ -34,7 +44,9 @@ const StudentList = (props: Props) => {
         <div></div>
         <div></div>
         <div className="">
-          <button className="button ">New Student</button>
+          <button className="button">
+            <Link to={"/register"}>New Student</Link>
+          </button>
         </div>
       </div>
 
@@ -51,7 +63,12 @@ const StudentList = (props: Props) => {
                 <p>{student.role}</p>
 
                 <div className="card-actions">
-                  <button className="button">Remove</button>
+                  <button
+                    className="button"
+                    onClick={() => handleDelete(student.id)}
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             </div>
