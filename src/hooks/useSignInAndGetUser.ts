@@ -1,12 +1,12 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth, usersCollection } from "../../firebase";
-import { getDocs, query, where } from "firebase/firestore";
+import { getDoc,doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
+
 interface User {
-  uid: string;
   email: string;
   role: "student" | "teacher";
 }
@@ -28,23 +28,20 @@ const useSignInAndGetUser = () => {
         password
       );
       const loggedInUser = userCredential.user;
-
+        console.log("=== LOGGED IN USER ===", loggedInUser);
       if (loggedInUser) {
-        const q = query(usersCollection, where("uid", "==", loggedInUser.uid));
-        const querySnapshot = await getDocs(q);
-
-        if (!querySnapshot.empty) {
-          const userDoc = querySnapshot.docs[0];
-          setUser(userDoc.data() as User);
-        } else {
-          throw new Error("User document not found");
+        // Get user data
+        const userDoc = await getDoc(doc(usersCollection, loggedInUser?.uid));
+        const userData = userDoc.data();
+        console.log("=== USER DATA ===", userData);
+        if (userData) {
+          setUser(userData as User);
+          console.log("=== USER ===", user);
+          navigate("/dashboard", { state: { role: userData?.role } });
         }
       }
     } catch (error) {
       setError(error.message || "An error occured.");
-    } finally {
-      setLoading(false);
-      navigate("/dashboard", { state: { role: user?.role } });
     }
   };
 
