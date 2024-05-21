@@ -3,18 +3,22 @@ import { useState } from "react";
 import { auth, usersCollection } from "../../firebase";
 import { getDocs, query, where } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import useAuth from "./useAuth";
 
-interface User {
-    uid: string;
-    email: string;
-    role: 'student' | 'teacher'
-}
+    interface User {
+        uid: string;
+        email: string;
+        role: 'student' | 'teacher'
+    }
 
 const useSignInAndGetUser = () => {
     const [user, setUser] = useState<User | null>(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string| null>(null)
     const navigate = useNavigate();
+
+    
+
     
     const signIn = async (email: string, password: string) => {
         setLoading(true)
@@ -39,7 +43,7 @@ const useSignInAndGetUser = () => {
             setError(error.message || 'An error occured.')
         } finally {
             setLoading(false)
-            navigate('/dashboard', { state: { role: user?.role }})
+            navigate('/Logout', { state: { role: user?.role }})
         }
     }
 

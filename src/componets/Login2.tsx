@@ -1,18 +1,32 @@
 import { useState } from 'react';
 import { auth, usersCollection } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
-import { User, signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc, getDocs, query, where } from 'firebase/firestore';
-import useSignInAndGetUser from '../hooks/useSignInAndGetUser';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
 const Login = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const { signIn, user, loading, error } = useSignInAndGetUser();
 
+    const navigate = useNavigate();
     // Login function
-    const handleLogin = async () => {
-        await signIn(email, password);
+    const login = async () => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            console.log('user credentials', user);
+            if (user) {
+                // Get user data
+                const userDoc = await getDoc(doc(usersCollection, user.uid));
+                const userData = userDoc.data();
+                if (userData) {
+                    navigate('/Logout', { state: { role: userData.role } });
+                }
+                console.log('user data', userData?.role);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -30,9 +44,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <button onClick={handleLogin}>Login</button>
-
-            {user && <div>{user.email}</div>}
+            <button onClick={login}>Login</button>
         </div>
     );
 };
