@@ -10,6 +10,7 @@ import ViewAssignments from "./componets/Teacher/ViewPublish/ViewAssignments";
 import ViewExamsStudent from "./componets/Student/ViewExams/ViewExamsStudent";
 import ViewAssignmentsStudent from "./componets/Student/ViewAssingments/ViewAssignmentsStudent";
 import StudentList from "./componets/StudentList/StudentList";
+import Logout from "./componets/Logout";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<h1>Not Found</h1>} />
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="/Logout" element={<Logout />} />
+          <Route path="/dashboard/Logout" element={<Logout />} />
           <Route
             path="/dashboard/GetExamsStudent"
             element={<ViewExamsStudent />}
