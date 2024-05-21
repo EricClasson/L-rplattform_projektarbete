@@ -9,6 +9,7 @@ import ViewExams from "./componets/Teacher/ViewPublish/ViewExams";
 import ViewAssignments from "./componets/Teacher/ViewPublish/ViewAssignments";
 import ViewExamsStudent from "./componets/Student/ViewExams/ViewExamsStudent";
 import ViewAssignmentsStudent from "./componets/Student/ViewAssingments/ViewAssignmentsStudent";
+import StudentList from "./componets/StudentList/StudentList";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           />
           <Route path="dashboard/GetAssignmentsTeacher" element={<ViewAssignments />} />
           <Route path="dashboard/GetExamsTeacher" element={<ViewExams />} />
+          <Route path="dashboard/GetStudents" element={<StudentList />} />
         </Route>
         <Route path="/Publish" element={<Publish />} />
       </Routes>
