@@ -56,6 +56,7 @@ export default function ViewExams() {
           >
             {editId === index.id ? (
               <>
+                <label>Title</label>
                 <input
                   placeholder="Title"
                   className="input border border-black"
@@ -63,6 +64,7 @@ export default function ViewExams() {
                   value={titleChange}
                   onChange={(e) => setTitleChange(e.target.value)}
                 />
+                <label>Description</label>
                 <textarea
                   className="input border border-black"
                   placeholder="Information"

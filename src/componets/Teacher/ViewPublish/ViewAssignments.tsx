@@ -55,6 +55,7 @@ export default function ViewAssignments() {
           >
             {editId === index.id ? (
               <>
+                <label>Title</label>
                 <input
                   placeholder="Title"
                   className="input border border-black "
@@ -62,6 +63,7 @@ export default function ViewAssignments() {
                   value={titleChange}
                   onChange={(e) => setTitleChange(e.target.value)}
                 />
+                <label>Description</label>
                 <textarea
                   className="input border border-black"
                   placeholder="Information"
