@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input {
+  @apply p-2 border rounded-md hover:border-zinc-400 text-zinc-900;
+}
+.button {
+  @apply bg-zinc-900 text-white p-2 rounded-md hover:bg-zinc-600;
+}

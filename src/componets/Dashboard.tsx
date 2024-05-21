@@ -1,26 +1,24 @@
-import { useLocation } from 'react-router-dom';
-// import useSignInAndGetUser from '../hooks/useSignInAndGetUser';
-// import useAuth from '../hooks/useAuth';
-// import useGetStudentAssignments from '../hooks/useGetStudentAssignments';
+import { Outlet, useLocation } from "react-router-dom";
+import Publish from "./Teacher/Publish/Publish";
+import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
-    const location = useLocation();
-    const { role } = location.state || { role: 'guest' };
+  const location = useLocation();
 
-    // const { assignments } = useGetStudentAssignments();
+  const { role } = location.state || { role: "guest" };
 
-    // const { user } = useAuth();
-
-    // console.log('user', user);
-
-    // console.log('assignments: ', assignments);
-
-    return (
+  return (
+    <div>
+      <div className="grid grid-cols-1 gap-4 breakPoint:grid-cols-[170px_1fr] lg:gap-8 ">
+        <Sidebar />
         <div>
-            <h1>Dashboard</h1>
-            <h2>Welcome as {role}</h2>
+          <h2 className="text-center">Welcome to the dashboard {role}</h2>
+          {role === "teacher" && <Publish />}
+          <Outlet />
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;
