@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CiMenuFries } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
@@ -6,19 +6,26 @@ import { IoBookSharp } from "react-icons/io5";
 import { FaPen } from "react-icons/fa";
 import { PiSignOutThin } from "react-icons/pi";
 import { IoPeopleOutline } from "react-icons/io5";
-import useSignInAndGetUser from "../hooks/useSignInAndGetUser";
+import { TbArrowBigUpLines } from "react-icons/tb";
 type Props = {
   role: string;
 };
 
 const Sidebar = (prop:Props) => {
-  const {user,loading} = useSignInAndGetUser();
-  console.log("=== USER ===", user, loading);
+  
   const [openMenu, setOpenMenu] = useState(false);
+    
   return (
     <div>
       {openMenu && (
         <ul className="gap-12 bg-slate-300 px-4 h-full w-full breakPoint:hidden md:hidden max-breakPoint:absolute top-[6rem] flex flex-col items-center justify-center text-center">
+          <li>
+            <Link to={"/dashboard/Publish"}>
+              <TbArrowBigUpLines className="btn btn-square bg-slate-100 p-4" />
+              <p>Publish</p>
+            </Link>
+          </li>
+          
           <li className="">
             <Link to={"/dashboard/GetAssignmentsStudent"}>
               <IoBookSharp className="btn btn-square bg-slate-100 p-4" />
@@ -45,6 +52,12 @@ const Sidebar = (prop:Props) => {
         </div>
 
         <ul className="max-breakPoint:hidden grid row-span-2 gap-20 md:justify-between md:flex justify-center text-center">
+          <li>
+            <Link to={"/dashboard/Publish"}>
+              <TbArrowBigUpLines className="btn btn-square bg-slate-100 p-4" />
+              <p>Publish</p>
+            </Link>
+          </li>
           <li className="">
             <Link to={"/dashboard/GetAssignmentsStudent"}>
               <IoBookSharp className="btn btn-square bg-slate-100 p-4" />
