@@ -20,6 +20,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<h1>Not Found</h1>} />
         <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="/Logout" element={<Logout />} />
           <Route
             path="/dashboard/GetExamsStudent"
             element={<ViewExamsStudent />}
