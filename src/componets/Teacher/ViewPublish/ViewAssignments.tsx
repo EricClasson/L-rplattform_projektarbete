@@ -1,11 +1,19 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
+import {
+  collection,
+  onSnapshot,
+  doc,
+  deleteDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { PublishDoc } from "../Publish/Publish";
 
 export default function ViewAssignments() {
   const [Assignments, setAssignment] = useState<PublishDoc[]>([]);
+  const [editId, setEditId] = useState<string | null>(null);
+  const [titleChange, setTitleChange] = useState<string>("");
+  const [informationChange, setInformationChange] = useState<string>("");
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "Assignments"), (snapshot) => {
@@ -22,28 +30,104 @@ export default function ViewAssignments() {
     await deleteDoc(doc(db, "Assignments", id));
   };
 
+  const handleUpdate = async (id: string) => {
+    try {
+      await updateDoc(doc(db, "Assignments", id), {
+        title: titleChange,
+        information: informationChange,
+      });
+      setEditId(null);
+      setTitleChange("");
+      setInformationChange("");
+    } catch (error) {
+      console.log("It didn't update", error);
+    }
+  };
+
   return (
-    <div className="flex flex-col ">
-      <h2 className="text-center">Assignment</h2>
+    <div className="flex flex-col">
+      <h2 className="text-center font-semibold py-6">Assignments</h2>
       <ul className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
         {Assignments.map((index) => (
           <li
             key={index.id}
-            className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6"
+            className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6 flex flex-col gap-4"
           >
-            <div>
-              <h2>{index.title}</h2>
-              <h3>{index.option}</h3>
+            {editId === index.id ? (
+              <>
+                <label>Title</label>
+                <input
+                  placeholder="Title"
+                  className="input border border-black "
+                  type="text"
+                  value={titleChange}
+                  onChange={(e) => setTitleChange(e.target.value)}
+                />
+                <label>Description</label>
+                <textarea
+                  className="input border border-black"
+                  placeholder="Information"
+                  rows="8"
+                  value={informationChange}
+                  onChange={(e) => setInformationChange(e.target.value)}
+                ></textarea>
+                <button
+                  className="buttonGreen"
+                  onClick={() => handleUpdate(index.id)}
+                >
+                  Update
+                </button>
+              </>
+            ) : (
+              <>
+                <div className="flex flex-col gap-4">
+                  <div>
+                    <div className="flex flex-row gap-1">
+                      <p className="text-xs"> Publish date: </p>
+                      <p className="text-xs font-semibold ">
+                        {index.date.slice(0, 10)}
+                      </p>
+                    </div>
+                    <div className="flex flex-row gap-1">
+                      <p className="text-xs"> Deadline: </p>
+                      <p className="text-xs font-semibold ">
+                        {index.date.slice(0, 10)}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h2>Title: {index.title}</h2>
+                    <h3>Type: {index.option}</h3>
+                  </div>
+                </div>
+
+                <div className="flex flex-col">
+                  <h3>Description:</h3>{" "}
+                  <p className="text-xs">{index.information}</p>
+                </div>
+              </>
+            )}
+            <div className="flex flex-row gap-5">
+              <button
+                onClick={() => handleDelete(index.id)}
+                className="button py-5"
+              >
+                Delete
+              </button>
+              {editId !== index.id && (
+                <button
+                  className="buttonTeal w-16"
+                  onClick={() => {
+                    setEditId(index.id);
+                    setTitleChange(index.title);
+                    setInformationChange(index.information);
+                  }}
+                >
+                  Edit
+                </button>
+              )}
             </div>
-            <div>
-              <p>{index.information}</p>
-            </div>
-            <button
-              onClick={() => handleDelete(index.id)}
-              className=" border border-black px-5"
-            >
-              Delete
-            </button>
           </li>
         ))}
       </ul>
