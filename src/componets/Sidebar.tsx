@@ -11,64 +11,22 @@ type Props = {
   role: string;
 };
 
-const Sidebar = (prop:Props) => {
-  
+const Sidebar = (prop: Props) => {
   const [openMenu, setOpenMenu] = useState(false);
-    
+
   return (
     <div>
       {openMenu && (
         <ul className="gap-12 bg-slate-300 px-4 h-full w-full breakPoint:hidden md:hidden max-breakPoint:absolute top-[6rem] flex flex-col items-center justify-center text-center">
-          {
-            prop.role === "teacher" &&(
-          <li>
-            <Link to={"/dashboard/Publish"}>
-              <TbArrowBigUpLines className="btn btn-square bg-slate-100 p-4" />
-              <p>Publish</p>
-            </Link>
-          </li>
-
-            )
-
-          }
-          
-          <li className="">
-            <Link to={"/dashboard/GetAssignmentsStudent"}>
-              <IoBookSharp className="btn btn-square bg-slate-100 p-4" />
-              <p>Assignments</p>
-            </Link>
-          </li>
-          <li className="">
-            <Link to={"/dashboard/GetExamsStudent"}>
-              <FaPen className="btn btn-square bg-slate-100 p-4" />
-              <p>Exams</p>
-            </Link>
-          </li>
-          <li className="">
-          <Link to={"/dashboard/GetStudents"}>
-            <IoPeopleOutline className="btn btn-square bg-slate-100 p-4" />
-            <p>Students</p>
-          </Link>
-          </li>
-        </ul>
-      )}
-      <div className="grid grid-row-4 relative place-items-center h-screen max-breakPoint:h-20  max-breakPoint:py-12 max-breakPoint:px-4 max-breakPoint:flex max-breakPoint:justify-between border-r-2 py-5 bg-slate-300">
-        <div className="grid row-span-1 border place-items-center btn-circle bg-slate-100 hover:bg-slate-200 w-20 h-20">
-          <h2 className="text-black text-xl">{ prop.role === "teacher" ? "T" : "S"}</h2>
-        </div>
-
-        <ul className="max-breakPoint:hidden grid row-span-2 gap-20 md:justify-between md:flex justify-center text-center">
-          {
-            prop.role === "teacher" &&(
-              <li>
+          {prop.role === "teacher" && (
+            <li>
               <Link to={"/dashboard/Publish"}>
                 <TbArrowBigUpLines className="btn btn-square bg-slate-100 p-4" />
                 <p>Publish</p>
               </Link>
             </li>
-            )
-          }
-          
+          )}
+
           <li className="">
             <Link to={"/dashboard/GetAssignmentsStudent"}>
               <IoBookSharp className="btn btn-square bg-slate-100 p-4" />
@@ -83,9 +41,46 @@ const Sidebar = (prop:Props) => {
           </li>
           <li className="">
             <Link to={"/dashboard/GetStudents"}>
-            <IoPeopleOutline className="btn btn-square bg-slate-100 p-4" />
-            <p>Students</p>
-          </Link>
+              <IoPeopleOutline className="btn btn-square bg-slate-100 p-4" />
+              <p>Students</p>
+            </Link>
+          </li>
+        </ul>
+      )}
+      <div className="grid grid-row-4 relative place-items-center h-screen max-breakPoint:h-20  max-breakPoint:py-12 max-breakPoint:px-4 max-breakPoint:flex max-breakPoint:justify-between border-r-2 py-5 bg-slate-300">
+        <div className="grid row-span-1 border place-items-center btn-circle bg-slate-100 hover:bg-slate-200 w-20 h-20">
+          <h2 className="text-black text-xl">
+            {prop.role === "teacher" ? "T" : "S"}
+          </h2>
+        </div>
+
+        <ul className="max-breakPoint:hidden grid row-span-2 gap-20 md:justify-between md:flex justify-center text-center">
+          {prop.role === "teacher" && (
+            <li>
+              <Link to={"/dashboard/Publish"}>
+                <TbArrowBigUpLines className="btn btn-square bg-slate-100 p-4" />
+                <p>Publish</p>
+              </Link>
+            </li>
+          )}
+
+          <li className="">
+            <Link to={"/dashboard/GetAssignmentsTeacher"}>
+              <IoBookSharp className="btn btn-square bg-slate-100 p-4" />
+              <p>Assignments</p>
+            </Link>
+          </li>
+          <li className="">
+            <Link to={"/dashboard/GetExamsTeacher"}>
+              <FaPen className="btn btn-square bg-slate-100 p-4" />
+              <p>Exams</p>
+            </Link>
+          </li>
+          <li className="">
+            <Link to={"/dashboard/GetStudents"}>
+              <IoPeopleOutline className="btn btn-square bg-slate-100 p-4" />
+              <p>Students</p>
+            </Link>
           </li>
         </ul>
         <div className="max-breakPoint:flex max-breakPoint:items-center max-breakPoint:gap-5 ">
