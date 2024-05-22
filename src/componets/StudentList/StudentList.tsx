@@ -19,7 +19,8 @@ interface Student {
 
 const StudentList = (props: Props) => {
   const [studentList, setStudentList] = useState<Student[]>([]);
-
+  const user = window.localStorage.getItem("user") || "";
+  const role = JSON.parse(user).role;
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
       const list: Student[] = snapshot.docs.map((doc) => ({
@@ -43,11 +44,16 @@ const StudentList = (props: Props) => {
       <div className="flex flex-row justify-between w-full px-5">
         <div></div>
         <div></div>
+        {
+          role === "teacher" && (
         <div className="">
           <button className="button">
             <Link to={"/register"}>New Student</Link>
           </button>
         </div>
+
+          )
+        }
       </div>
 
       <ul className="grid grid-cols-3 py-10 gap-8 ">
@@ -61,7 +67,8 @@ const StudentList = (props: Props) => {
               <div className="card-body items-center text-center">
                 <h2 className="card-title">{student.email}</h2>
                 <p>{student.role}</p>
-
+                {
+                  role === "teacher" && (
                 <div className="card-actions">
                   <button
                     className="button"
@@ -70,6 +77,9 @@ const StudentList = (props: Props) => {
                     Remove
                   </button>
                 </div>
+
+                  )
+                }
               </div>
             </div>
           </li>

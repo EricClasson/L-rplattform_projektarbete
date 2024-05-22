@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
-import { auth, usersCollection } from "../../firebase";
-import { useNavigate } from "react-router-dom";
-import { User, signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import useSignInAndGetUser from "../hooks/useSignInAndGetUser";
 import { fetchUsersByRole } from "../helpers";
-import { toast } from "sonner";
+
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { signIn, user, loading, error } = useSignInAndGetUser();
+  const { signIn } = useSignInAndGetUser();
 
   useEffect(() => {
     const fetchData = async () => {

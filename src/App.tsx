@@ -36,8 +36,8 @@ function App() {
           />
           <Route path="/dashboard/GetExamsTeacher" element={<ViewExams />} />
           <Route path="/dashboard/GetStudents" element={<StudentList />} />
+        <Route path="/dashboard/Publish" element={<Publish />} />
         </Route>
-        <Route path="/Publish" element={<Publish />} />
       </Routes>
     </>
   );
