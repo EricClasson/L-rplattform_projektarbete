@@ -8,6 +8,7 @@ function Logout() {
     const userlogout = async () => {
         try {
             await signOut(auth).then(() => {
+                window.localStorage.removeItem('user');
                 navigate('/');
             });
         } catch (error) {
@@ -15,9 +16,9 @@ function Logout() {
         }
     };
     return (
-        <div>
-            <h1>Sign Out Page</h1>
-            <button onClick={userlogout}>SignOut</button>
+        <div className='flex flex-col items-center justify-center p-3 gap-2 shadow-2xl border'>
+            <h1 className=' text-xl font-semibold'>Sign Out Page</h1>
+            <button onClick={userlogout} className='button'>SignOut</button>
         </div>
     );
 }
