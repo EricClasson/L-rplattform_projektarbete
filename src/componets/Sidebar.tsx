@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CiMenuFries } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
@@ -19,12 +19,18 @@ const Sidebar = (prop:Props) => {
     <div>
       {openMenu && (
         <ul className="gap-12 bg-slate-300 px-4 h-full w-full breakPoint:hidden md:hidden max-breakPoint:absolute top-[6rem] flex flex-col items-center justify-center text-center">
+          {
+            prop.role === "teacher" &&(
           <li>
             <Link to={"/dashboard/Publish"}>
               <TbArrowBigUpLines className="btn btn-square bg-slate-100 p-4" />
               <p>Publish</p>
             </Link>
           </li>
+
+            )
+
+          }
           
           <li className="">
             <Link to={"/dashboard/GetAssignmentsStudent"}>
@@ -52,12 +58,17 @@ const Sidebar = (prop:Props) => {
         </div>
 
         <ul className="max-breakPoint:hidden grid row-span-2 gap-20 md:justify-between md:flex justify-center text-center">
-          <li>
-            <Link to={"/dashboard/Publish"}>
-              <TbArrowBigUpLines className="btn btn-square bg-slate-100 p-4" />
-              <p>Publish</p>
-            </Link>
-          </li>
+          {
+            prop.role === "teacher" &&(
+              <li>
+              <Link to={"/dashboard/Publish"}>
+                <TbArrowBigUpLines className="btn btn-square bg-slate-100 p-4" />
+                <p>Publish</p>
+              </Link>
+            </li>
+            )
+          }
+          
           <li className="">
             <Link to={"/dashboard/GetAssignmentsStudent"}>
               <IoBookSharp className="btn btn-square bg-slate-100 p-4" />
