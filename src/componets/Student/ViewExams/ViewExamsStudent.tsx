@@ -20,7 +20,7 @@ const ViewExamsStudent = () => {
 
   return (
     <div className="flex flex-col ">
-      <h2 className="text-center">Exams</h2>
+      <h2 className="text-center font-semibold py-6">Exams</h2>
       <ul className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
         {Assignments.map((index) => (
           <li

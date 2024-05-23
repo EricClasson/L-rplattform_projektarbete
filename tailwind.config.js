@@ -4,6 +4,8 @@ export default {
   theme: {
     screens: {
       breakPoint: "675px",
+      breakPoint3: "935px",
+      breakPoint2: "1350px",
     },
     extend: {},
   },

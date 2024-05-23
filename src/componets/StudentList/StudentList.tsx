@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  onSnapshot,
-  doc,
-  getDoc,
-  collection,
-  deleteDoc,
-} from "firebase/firestore";
+import { onSnapshot, doc, collection, deleteDoc } from "firebase/firestore";
 import { db, usersCollection } from "../../../firebase";
 import { useLocation, Link } from "react-router-dom";
-
-type Props = {};
 
 interface Student {
   id: string;
@@ -17,7 +9,7 @@ interface Student {
   email: string;
 }
 
-const StudentList = (props: Props) => {
+const StudentList = () => {
   const [studentList, setStudentList] = useState<Student[]>([]);
   const user = window.localStorage.getItem("user") || "";
   const role = JSON.parse(user).role;
@@ -39,47 +31,46 @@ const StudentList = (props: Props) => {
   };
 
   return (
-    <div className="grid justify-items-center grid-flow-row py-10">
-      <h2>StudentList</h2>
+    <div className="grid justify-items-center grid-flow-row ">
+      <h2 className="font-semibold py-6">StudentList</h2>
       <div className="flex flex-row justify-between w-full px-5">
         <div></div>
         <div></div>
-        {
-          role === "teacher" && (
-        <div className="">
-          <button className="button">
-            <Link to={"/register"}>New Student</Link>
-          </button>
-        </div>
-
-          )
-        }
+        {role === "teacher" && (
+          <div className="">
+            <button className="button">
+              <Link to={"/register"}>New Student</Link>
+            </button>
+          </div>
+        )}
       </div>
 
-      <ul className="grid grid-cols-3 py-10 gap-8 ">
+      <ul className="grid grid-cols-2 py-10 gap-10 max-breakPoint3:flex max-breakPoint3:flex-col  breakPoint2:grid-cols-3 ">
         {studentList.map((student) => (
-          <li key={student.email} className="w-full">
+          <li key={student.email} className="hover:shadow-lg">
             <div className="card w-96 bg-base-100 shadow-xl">
-              <figure className="px-8 pt-8 flex flex-col items-center">
-                <div className="btn btn-circle"></div>
-                <p>Name</p>
+              <figure className="px-8 pt-8 flex flex-col flex-wrap items-center">
+                <div className="btn btn-circle">
+                  <p>{student.firstname.slice(0, 1).toUpperCase()}</p>
+                </div>
+                <div className="flex flex-row gap-1">
+                  <p>{student.firstname}</p>
+                  <p>{student.lastname}</p>
+                </div>
               </figure>
               <div className="card-body items-center text-center">
                 <h2 className="card-title">{student.email}</h2>
                 <p>{student.role}</p>
-                {
-                  role === "teacher" && (
-                <div className="card-actions">
-                  <button
-                    className="button"
-                    onClick={() => handleDelete(student.id)}
-                  >
-                    Remove
-                  </button>
-                </div>
-
-                  )
-                }
+                {role === "teacher" && (
+                  <div className="card-actions">
+                    <button
+                      className="button"
+                      onClick={() => handleDelete(student.id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </li>
