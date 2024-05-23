@@ -1,30 +1,48 @@
-# React + TypeScript + Vite
+# Lärplattform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Om projektet
 
-Currently, two official plugins are available:
+Syftet med denna gruppuppgift är att skapa ett fungerande CMS (Content Management System) med hjälp av TypeScript, React och Firebase. Det ska ha ett användarvänligt gränssnitt och funktioner för att skapa, redigera och ta bort innehåll.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Built With
 
-## Expanding the ESLint configuration
+- JavaScript
+- Typescript
+- Firebase
+- React
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Getting Started
 
-- Configure the top-level `parserOptions` property like this:
+### Installation
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+1. Clone the repo
+   ```sh
+   git clone https://github.com/EricClasson/L-rplattform_projektarbete.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Create .env file
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+   ```sh
+   VITE_API_KEY=
+   VITE_AUTH_DOMAIN=
+   VITE_PROJECT_ID=
+   VITE_STORAGE_BUCKET=
+   VITE_MESSAGING_SENDER_ID=
+   VITE_APP_ID=
+
+   ```
+
+4. Run project
+   ```sh
+   npm run dev
+   ```
+
+## Created by
+
+- Roudi Alzkemi [Github](https://github.com/Roudi22)
+- Eric Classon [Github](https://github.com/EricClasson)
+- Van Doan [Github](https://github.com/vaantheman)
+- Oliver hedell [Github](https://github.com/bankmasta)
