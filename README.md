@@ -10,6 +10,7 @@ Syftet med denna gruppuppgift är att skapa ett fungerande CMS (Content Manageme
 - Typescript
 - Firebase
 - React
+- Tailwind
 
 ## Getting Started
 
