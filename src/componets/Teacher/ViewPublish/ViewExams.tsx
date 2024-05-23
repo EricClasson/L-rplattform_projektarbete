@@ -94,7 +94,7 @@ export default function ViewExams() {
                     <div className="flex flex-row gap-1">
                       <p className="text-xs"> Deadline: </p>
                       <p className="text-xs font-semibold ">
-                        {index.date.slice(0, 10)}
+                        {index.dueDate ? index.dueDate.slice(0, 10) : "No Deadline"}
                       </p>
                     </div>
                   </div>
