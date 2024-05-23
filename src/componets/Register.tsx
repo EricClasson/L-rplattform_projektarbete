@@ -82,7 +82,7 @@ function Register() {
                 ),
             });
 
-            navigate('/');
+            navigate('/dashboard');
         } catch (error) {
             console.log(error);
         }
