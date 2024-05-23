@@ -37,7 +37,7 @@ const useSignInAndGetUser = () => {
           setLoading(false);
           window.localStorage.setItem("user", JSON.stringify(userData));
           console.log("=== USER ===", user);
-          navigate("/dashboard", { state: { role: userData?.role } });
+          navigate("/dashboard/Publish", { state: { role: userData?.role } });
         }
       }
     } catch (error) {
