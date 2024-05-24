@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   collection,
   onSnapshot,
@@ -8,13 +8,14 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { PublishDoc } from "../Publish/Publish";
-
+import { Link } from "react-router-dom";
 export default function ViewAssignments() {
   const [Assignments, setAssignment] = useState<PublishDoc[]>([]);
   const [editId, setEditId] = useState<string | null>(null);
   const [titleChange, setTitleChange] = useState<string>("");
   const [informationChange, setInformationChange] = useState<string>("");
-
+  const user = window.localStorage.getItem("user") || "";
+  const role = JSON.parse(user).role;
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "Assignments"), (snapshot) => {
       const Publish: PublishDoc[] = snapshot.docs.map((doc) => ({
@@ -22,10 +23,14 @@ export default function ViewAssignments() {
         id: doc.id,
       }));
       setAssignment(Publish);
+      console.log(Publish);
     });
     return () => unsub();
   }, []);
+  // Get the assignment details by id
+  
 
+  
   const handleDelete = async (id: string) => {
     await deleteDoc(doc(db, "Assignments", id));
   };
@@ -108,14 +113,19 @@ export default function ViewAssignments() {
                 </div>
               </>
             )}
-            <div className="flex flex-row gap-5">
+            <div className="flex flex-row items-center gap-5">
+              {
+                role === "teacher" && (
               <button
                 onClick={() => handleDelete(index.id)}
                 className="button py-5"
               >
                 Delete
               </button>
-              {editId !== index.id && (
+                  
+                )
+              }
+              {editId !== index.id && role === "teacher" && (
                 <button
                   className="buttonTeal w-16"
                   onClick={() => {
@@ -127,6 +137,10 @@ export default function ViewAssignments() {
                   Edit
                 </button>
               )}
+              <Link to={`/dashboard/GetAssignmentsTeacher/${index.id}`}>
+              <button className="buttonRed w-16">View</button>
+              
+              </Link>
             </div>
           </li>
         ))}

@@ -1,7 +1,7 @@
-import { Outlet } from 'react-router-dom';
-import Publish from './Teacher/Publish/Publish';
-import Sidebar from './Sidebar';
-import { useAuth } from '../hooks/useAuth';
+
+import { Outlet } from "react-router-dom";
+import Sidebar from "./Sidebar";
+
 
 const Dashboard = () => {
     // const user = window.localStorage.getItem('user') || '';

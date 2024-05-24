@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { onSnapshot, doc, collection, deleteDoc } from 'firebase/firestore';
-import { db, usersCollection } from '../../../firebase';
-import { useLocation, Link } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+
+import React, { useState, useEffect } from "react";
+import {
+  onSnapshot,
+  doc,
+  collection,
+  deleteDoc,
+} from "firebase/firestore";
+import { db } from "../../../firebase";
+import { Link } from "react-router-dom";
+
 
 interface Student {
     id: string;
@@ -11,11 +17,27 @@ interface Student {
 }
 
 const StudentList = () => {
-    const [studentList, setStudentList] = useState<Student[]>([]);
-    // const user = window.localStorage.getItem("user") || "";
-    // const role = JSON.parse(user).role;
-    const { user, userData, loading } = useAuth();
-    const role = userData?.role;
+
+  const [studentList, setStudentList] = useState<Student[]>([]);
+  const user = window.localStorage.getItem("user") || "";
+  const role = JSON.parse(user).role;
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
+      const list: Student[] = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Student[];
+
+      const result = list.filter((student) => student.role === "student");
+      setStudentList(result);
+    });
+    return () => unsub();
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    await deleteDoc(doc(db, "users", id));
+  };
+
 
     useEffect(() => {
         const unsub = onSnapshot(collection(db, 'users'), (snapshot) => {
