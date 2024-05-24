@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Publish from "./Teacher/Publish/Publish";
 import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
