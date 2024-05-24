@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import {
   onSnapshot,
   doc,
-  getDoc,
   collection,
   deleteDoc,
 } from "firebase/firestore";
-import { db, usersCollection } from "../../../firebase";
-import { useLocation, Link } from "react-router-dom";
+import { db } from "../../../firebase";
+import { Link } from "react-router-dom";
 
-type Props = {};
+
 
 interface Student {
   id: string;
@@ -17,7 +16,7 @@ interface Student {
   email: string;
 }
 
-const StudentList = (props: Props) => {
+const StudentList = () => {
   const [studentList, setStudentList] = useState<Student[]>([]);
   const user = window.localStorage.getItem("user") || "";
   const role = JSON.parse(user).role;
