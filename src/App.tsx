@@ -17,9 +17,8 @@ function App() {
     return (
         <>
             <Toaster />
-
-            <Routes>
-                <AuthProvider>
+            <AuthProvider>
+                <Routes>
                     <Route path="/" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="*" element={<h1>Not Found</h1>} />
@@ -38,8 +37,8 @@ function App() {
                         <Route path="/dashboard/GetStudents" element={<StudentList />} />
                         <Route path="/dashboard/Publish" element={<Publish />} />
                     </Route>
-                </AuthProvider>
-            </Routes>
+                </Routes>
+            </AuthProvider>
         </>
     );
 }
