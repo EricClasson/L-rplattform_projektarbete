@@ -1,25 +1,28 @@
-import { Outlet } from "react-router-dom";
-import Publish from "./Teacher/Publish/Publish";
-import Sidebar from "./Sidebar";
+import { Outlet } from 'react-router-dom';
+import Publish from './Teacher/Publish/Publish';
+import Sidebar from './Sidebar';
+import { useAuth } from '../hooks/useAuth';
 
 const Dashboard = () => {
-  const user = window.localStorage.getItem("user") || "";
-  const role = JSON.parse(user).role;
-  
-  return (
-    <div>
-      <div className="grid grid-cols-1 gap-4 breakPoint:grid-cols-[170px_1fr] lg:gap-8 ">
-        <Sidebar role={role}/>
+    // const user = window.localStorage.getItem('user') || '';
+    // const role = JSON.parse(user).role;
+    const { user, userData, loading } = useAuth();
+
+    return (
         <div>
+            <div className="grid grid-cols-1 gap-4 breakPoint:grid-cols-[170px_1fr] lg:gap-8 ">
+                <Sidebar role={userData?.role} />
+                <div>
+                    <h2 className="text-center py-5">
+                        Welcome to the dashboard {userData?.role}, {userData?.firstname}{' '}
+                        {userData?.lastname}{' '}
+                    </h2>
 
-          <h2 className="text-center py-5">Welcome to the dashboard {role}</h2>
-          
-
-          <Outlet />
+                    <Outlet />
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Dashboard;
