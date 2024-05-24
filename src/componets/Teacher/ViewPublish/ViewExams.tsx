@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useState, useEffect } from "react";
 import {
   collection,
@@ -9,13 +9,13 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { PublishDoc } from "../Publish/Publish";
-
+import { useAuth } from "../../../hooks/useAuth";
 export default function ViewExams() {
   const [Assignments, setAssignment] = useState<PublishDoc[]>([]);
   const [editId, setEditId] = useState<string | null>(null);
   const [titleChange, setTitleChange] = useState<string>("");
   const [informationChange, setInformationChange] = useState<string>("");
-
+  const { userData } = useAuth();
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "p_Exams"), (snapshot) => {
       const Publish: PublishDoc[] = snapshot.docs.map((doc) => ({
@@ -112,13 +112,14 @@ export default function ViewExams() {
               </>
             )}
             <div className="flex flex-row gap-5">
-              <button
+              { userData.role === "teacher" && 
+                <button
                 onClick={() => handleDelete(index.id)}
                 className="button py-5"
               >
                 Delete
-              </button>
-              {editId !== index.id && (
+              </button>}
+              {editId !== index.id && userData.role === "teacher" && (
                 <button
                   className="buttonTeal w-16"
                   onClick={() => {
