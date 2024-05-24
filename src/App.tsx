@@ -11,6 +11,7 @@ import ViewExamsStudent from "./componets/Student/ViewExams/ViewExamsStudent";
 import ViewAssignmentsStudent from "./componets/Student/ViewAssingments/ViewAssignmentsStudent";
 import StudentList from "./componets/StudentList/StudentList";
 import Logout from "./componets/Logout";
+import ViewAssignmentDetails from "./componets/Teacher/ViewPublish/ViewAssignmentDetails";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
             path="/dashboard/GetAssignmentsTeacher"
             element={<ViewAssignments />}
           />
+          {/* view assignment details route */}
+          <Route path="/dashboard/GetAssignmentsTeacher/:id" element={<ViewAssignmentDetails />} />
           <Route path="/dashboard/GetExamsTeacher" element={<ViewExams />} />
           <Route path="/dashboard/GetStudents" element={<StudentList />} />
         <Route path="/dashboard/Publish" element={<Publish />} />
