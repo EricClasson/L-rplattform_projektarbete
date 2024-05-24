@@ -52,10 +52,6 @@ const StudentList = () => {
         return () => unsub();
     }, []);
 
-    const handleDelete = async (id: string) => {
-        await deleteDoc(doc(db, 'users', id));
-    };
-
     return (
         <div className="grid justify-items-center grid-flow-row ">
             <h2 className="font-semibold py-6">StudentList</h2>

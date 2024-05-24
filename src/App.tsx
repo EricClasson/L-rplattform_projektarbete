@@ -13,6 +13,7 @@ import ViewAssignmentsStudent from "./componets/Student/ViewAssingments/ViewAssi
 import StudentList from "./componets/StudentList/StudentList";
 import Logout from "./componets/Logout";
 import ViewAssignmentDetails from "./componets/Teacher/ViewPublish/ViewAssignmentDetails";
+import { AuthProvider } from "./hooks/useAuth";
 
 function App() {
   return (
