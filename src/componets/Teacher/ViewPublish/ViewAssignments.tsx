@@ -3,7 +3,7 @@ import { collection, onSnapshot, doc, deleteDoc, updateDoc } from 'firebase/fire
 import { db } from '../../../../firebase';
 import { PublishDoc } from '../Publish/Publish';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../../hooks/useAuth';
+import SubmitAssignment from '../../Student/submissions/SubmitAssignment';
 export default function ViewAssignments() {
     const [Assignments, setAssignment] = useState<PublishDoc[]>([]);
     const [editId, setEditId] = useState<string | null>(null);
@@ -135,7 +135,10 @@ export default function ViewAssignments() {
                                 </button>
                             )}
                             <Link to={`/dashboard/GetAssignmentsTeacher/${index.id}`}>
-                                <button className="button">View</button>
+                                <button className="button border">View</button>
+                            </Link>
+                            <Link to={`/dashboard/SubmitAssignment/${index.id}`}>
+                                <button className="buttonGreen">Submit</button>
                             </Link>
                         </div>
                     </li>

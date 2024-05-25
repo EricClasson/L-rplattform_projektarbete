@@ -14,6 +14,7 @@ import StudentList from "./componets/StudentList/StudentList";
 import Logout from "./componets/Logout";
 import ViewAssignmentDetails from "./componets/Teacher/ViewPublish/ViewAssignmentDetails";
 import { AuthProvider } from "./hooks/useAuth";
+import SubmitAssignment from "./componets/Student/submissions/SubmitAssignment";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           />
           {/* view assignment details route */}
           <Route path="/dashboard/GetAssignmentsTeacher/:id" element={<ViewAssignmentDetails />} />
+          <Route path="/dashboard/SubmitAssignment/:id" element={<SubmitAssignment/>}/>
           <Route path="/dashboard/GetExamsTeacher" element={<ViewExams />} />
           <Route path="/dashboard/GetStudents" element={<StudentList />} />
         <Route path="/dashboard/Publish" element={<Publish />} />
