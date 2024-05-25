@@ -22,7 +22,6 @@ function Register() {
 
     const [error, setError] = useState('');
 
-    // const getdb = getDatabase();
     const auth = getAuth();
     const navigate = useNavigate();
 
@@ -58,9 +57,7 @@ function Register() {
                 firstname: '',
                 lastname: '',
             });
-            // cLwo1qT9zgXfp4vWfuoiflwE1CW2;
 
-            // document.get.exams(studentId);
             toast('Successfully created the user!', {
                 className: 'bg-green-100 flex items-center',
                 duration: 5000,
@@ -82,7 +79,7 @@ function Register() {
                 ),
             });
 
-            navigate('/dashboard');
+            navigate('/dashboard/GetStudents');
         } catch (error) {
             console.log(error);
         }
