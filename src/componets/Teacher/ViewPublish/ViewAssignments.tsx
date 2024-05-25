@@ -4,16 +4,14 @@ import { db } from '../../../../firebase';
 import { PublishDoc } from '../Publish/Publish';
 import { Link } from 'react-router-dom';
 import SubmitAssignment from '../../Student/submissions/SubmitAssignment';
+import { useAuth } from '../../../hooks/useAuth';
 export default function ViewAssignments() {
     const [Assignments, setAssignment] = useState<PublishDoc[]>([]);
     const [editId, setEditId] = useState<string | null>(null);
     const [titleChange, setTitleChange] = useState<string>('');
     const [informationChange, setInformationChange] = useState<string>('');
 
-    // const user = window.localStorage.getItem("user") || "";
-    // const role = JSON.parse(user).role;
-
-    const { user, userData, loading } = useAuth();
+    const { userData } = useAuth();
     const role = userData?.role;
 
     useEffect(() => {

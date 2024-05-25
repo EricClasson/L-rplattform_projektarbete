@@ -24,15 +24,12 @@ const ViewAssignmentDetails = () => {
         }
     }, [id]);
     return (
-        <div className="w-full h-screen flex items-center justify-center text-white">
-            <div className="p-8 bg-white border shadow-md rounded-md flex flex-col gap-4 min-w-[400px]">
-                <h1 className="text-zinc-900 font-bold">Assignment Details</h1>
-                <div>
-                    <h2 className="text-zinc-900 font-semibold py-2">{assignmentDetails?.title}</h2>
-                    <p className="text-zinc-900 py-6">{assignmentDetails?.information}</p>
-                    <p className="text-zinc-600 text-xs">{assignmentDetails?.date}</p>
-                    {/* <p className="text-zinc-900 font-semibold">{assignmentDetails?.title}</p> */}
-                </div>
+        <div className="flex flex-col">
+            <div className="flex p-8 border shadow-md rounded-md flex-col items-center gap-4">
+                <h1 className="text-zinc-900 font-bold">Assignment details</h1>
+                <p className="text-zinc-900 font-semibold">{assignmentDetails?.title}</p>
+                <p className="text-zinc-900">{assignmentDetails?.information}</p>
+                <p className="text-zinc-600 text-xs">{assignmentDetails?.date}</p>
             </div>
         </div>
     );
