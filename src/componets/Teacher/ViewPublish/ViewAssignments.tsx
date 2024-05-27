@@ -135,9 +135,16 @@ export default function ViewAssignments() {
                             <Link to={`/dashboard/GetAssignmentsTeacher/${index.id}`}>
                                 <button className="button border">View</button>
                             </Link>
-                            <Link to={`/dashboard/SubmitAssignment/${index.id}`}>
+                            {   role === 'student' ? (
+                                <Link to={`/dashboard/SubmitAssignment/${index.id}`}>
                                 <button className="buttonGreen">Submit</button>
+                            
+                            </Link>)
+                            : (
+                                <Link to={`/dashboard/ViewSubmissions/${index.id}`}>
+                                <button className="buttonGreen">View Submissions</button>
                             </Link>
+                            )}
                         </div>
                     </li>
                 ))}
