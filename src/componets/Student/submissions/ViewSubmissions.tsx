@@ -2,12 +2,15 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { db } from "../../../../firebase"
+import withLoading from "../../../HOC"
 
 const ViewSubmissions = () => {
     const { id } = useParams<{ id: string }>()
     const [submissions, setSubmissions] = useState<any[]>([])
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
         const getSubmissions = async () => {
+            setLoading(true)
             const q = query(collection(db, `Assignments/${id}/submissions`))
             const querySnapshot = await getDocs(q)
             const submissions: any[] = []
@@ -15,6 +18,7 @@ const ViewSubmissions = () => {
                 submissions.push(doc.data())
             })
             setSubmissions(submissions)
+            setLoading(false)
         }
         getSubmissions()
     }, [id])
@@ -33,4 +37,5 @@ const ViewSubmissions = () => {
   )
 }
 
-export default ViewSubmissions
+export default withLoading(ViewSubmissions)
+
