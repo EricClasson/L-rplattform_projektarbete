@@ -50,7 +50,8 @@ const Sidebar = (prop: Props) => {
       <div className="grid grid-row-4 sticky top-0 place-items-center h-screen max-breakPoint:h-20  max-breakPoint:py-12 max-breakPoint:px-4 max-breakPoint:flex max-breakPoint:justify-between border-r-2 py-5 bg-slate-300">
         <div className="grid row-span-1 border place-items-center btn-circle bg-slate-100 hover:bg-slate-200 w-20 h-20">
           <h2 className="text-black text-xl">
-            {prop.role === "teacher" ? "T" : "S"}
+            {prop.role === "teacher" && "T"}
+            {prop.role === "student" && "S"}
           </h2>
         </div>
 
