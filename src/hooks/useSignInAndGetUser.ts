@@ -42,7 +42,7 @@ const useSignInAndGetUser = () => {
           setLoading(false);
           window.localStorage.setItem("user", JSON.stringify(userData));
           console.log("=== USER ===", user);
-          navigate("dashboard/GetAssignmentsTeacher", {
+          navigate("dashboard/GetAssignments", {
             state: { role: userData?.role },
           });
         }
