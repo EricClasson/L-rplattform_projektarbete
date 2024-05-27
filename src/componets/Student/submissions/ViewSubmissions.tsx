@@ -20,12 +20,12 @@ const ViewSubmissions = () => {
     }, [id])
   return (
     <div>
-        <h1 className="text-zinc-900 font-bold">Submissions</h1>
+        <h1 className="text-zinc-900 font-bold text-center">Submissions</h1>
         <ul>
             {submissions.map((submission, index) => (
-            <li key={index}>
-                <p>Student Name: {submission.studentName}</p>
-                <p>Answer: {submission.answer}</p>
+            <li className="shadow-xl p-8 mt-8 rounded-xl" key={index}>
+                <p><strong>Student Name:</strong> {submission.studentName}</p>
+                <p><strong>Answer:</strong> {submission.answer}</p>
             </li>
             ))}
         </ul>
