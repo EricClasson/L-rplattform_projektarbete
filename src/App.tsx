@@ -27,18 +27,13 @@ function App() {
                     <Route path="*" element={<h1>Not Found</h1>} />
                     <Route path="/dashboard" element={<Dashboard />}>
                         <Route path="/dashboard/Logout" element={<Logout />} />
-                        <Route path="/dashboard/GetExamsStudent" element={<ViewExamsStudent />} />
                         <Route
-                            path="/dashboard/GetAssignmentsStudent"
-                            element={<ViewAssignmentsStudent />}
-                        />
-                        <Route
-                            path="/dashboard/GetAssignmentsTeacher"
+                            path="/dashboard/GetAssignments"
                             element={<ViewAssignments />}
                         />
                         {/* view assignment details route */}
                         <Route
-                            path="/dashboard/GetAssignmentsTeacher/:id"
+                            path="/dashboard/GetAssignments/:id"
                             element={<ViewAssignmentDetails />}
                         />
                         <Route
@@ -46,7 +41,7 @@ function App() {
                             element={<SubmitAssignment />}
                         />
                         <Route path='/dashboard/ViewSubmissions/:id' element={<ViewSubmissions />} />
-                        <Route path="/dashboard/GetExamsTeacher" element={<ViewExams />} />
+                        <Route path="/dashboard/GetExams" element={<ViewExams />} />
                         <Route path="/dashboard/GetStudents" element={<StudentList />} />
                         <Route path="/dashboard/Publish" element={<Publish />} />
                     </Route>

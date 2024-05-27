@@ -28,13 +28,13 @@ const Sidebar = (prop: Props) => {
           )}
 
           <li className="">
-            <Link to={"/dashboard/GetAssignmentsStudent"}>
+            <Link to={"/dashboard/GetAssignments"}>
               <IoBookSharp className="btn btn-square bg-slate-100 p-4" />
               <p>Assignments</p>
             </Link>
           </li>
           <li className="">
-            <Link to={"/dashboard/GetExamsStudent"}>
+            <Link to={"/dashboard/GetExams"}>
               <FaPen className="btn btn-square bg-slate-100 p-4" />
               <p>Exams</p>
             </Link>
@@ -65,13 +65,13 @@ const Sidebar = (prop: Props) => {
           )}
 
           <li className="">
-            <Link to={"/dashboard/GetAssignmentsTeacher"}>
+            <Link to={"/dashboard/GetAssignments"}>
               <IoBookSharp className="btn btn-square bg-slate-100 p-4" />
               <p>Assignments</p>
             </Link>
           </li>
           <li className="">
-            <Link to={"/dashboard/GetExamsTeacher"}>
+            <Link to={"/dashboard/GetExams"}>
               <FaPen className="btn btn-square bg-slate-100 p-4" />
               <p>Exams</p>
             </Link>
