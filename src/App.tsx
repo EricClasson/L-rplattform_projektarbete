@@ -7,8 +7,8 @@ import { Toaster } from 'sonner';
 import Publish from './componets/Teacher/Publish/Publish';
 import ViewExams from './componets/Teacher/ViewPublish/ViewExams';
 import ViewAssignments from './componets/Teacher/ViewPublish/ViewAssignments';
-import ViewExamsStudent from './componets/Student/ViewExams/ViewExamsStudent';
-import ViewAssignmentsStudent from './componets/Student/ViewAssingments/ViewAssignmentsStudent';
+
+
 import StudentList from './componets/StudentList/StudentList';
 import Logout from './componets/Logout';
 import ViewAssignmentDetails from './componets/Teacher/ViewPublish/ViewAssignmentDetails';

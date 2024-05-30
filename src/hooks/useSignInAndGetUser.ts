@@ -25,28 +25,25 @@ const useSignInAndGetUser = () => {
         password
       );
       const loggedInUser = userCredential.user;
-      console.log("=== LOGGED IN USER ===", loggedInUser);
       if (loggedInUser) {
         // Get user data
         const userDoc = await getDoc(doc(usersCollection, loggedInUser?.uid));
         const userData = userDoc.data();
-        console.log("=== USER DATA ===", userData);
-        if (userData.role === "teacher") {
+        
+        if (userData?.role === "teacher") {
           setUser(userData as User);
           setLoading(false);
-          console.log("=== USER ===", user);
           navigate("/dashboard/Publish", { state: { role: userData?.role } });
-        } else if (userData.role === "student") {
+        } else if (userData?.role === "student") {
           setUser(userData as User);
           setLoading(false);
-          console.log("=== USER ===", user);
           navigate("dashboard/GetAssignments", {
             state: { role: userData?.role },
           });
         }
       }
     } catch (error) {
-      setError(error.message || "An error occured.");
+      setError("An error occured.");
     }
   };
 

@@ -9,7 +9,6 @@ import {
 import { db } from "../../../../firebase";
 import { PublishDoc } from "../Publish/Publish";
 import { Link } from "react-router-dom";
-import SubmitAssignment from "../../Student/submissions/SubmitAssignment";
 import { useAuth } from "../../../hooks/useAuth";
 export default function ViewAssignments() {
   const [Assignments, setAssignment] = useState<PublishDoc[]>([]);
@@ -24,10 +23,9 @@ export default function ViewAssignments() {
     const unsub = onSnapshot(collection(db, "Assignments"), (snapshot) => {
       const Publish: PublishDoc[] = snapshot.docs.map((doc) => ({
         ...(doc.data() as PublishDoc),
-        id: doc.id,
+        id: doc.id as "",
       }));
       setAssignment(Publish);
-      console.log(Publish);
     });
     return () => unsub();
   }, []);
@@ -74,7 +72,7 @@ export default function ViewAssignments() {
                 <textarea
                   className="input border border-black"
                   placeholder="Information"
-                  rows="8"
+                  rows={8}
                   value={informationChange}
                   onChange={(e) => setInformationChange(e.target.value)}
                 ></textarea>

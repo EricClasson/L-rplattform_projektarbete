@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { addDoc, collection, getDocs, query, Timestamp, where } from 'firebase/firestore';
-import { db, auth, usersCollection } from '../../../../firebase';
+import { db } from '../../../../firebase';
 import { useAuth } from '../../../hooks/useAuth';
 import { useParams } from 'react-router-dom';
 import ViewAssignmentDetails from '../../Teacher/ViewPublish/ViewAssignmentDetails';
+import { toast } from 'sonner';
 
 const SubmitAssignment = () => {
     const [answer, setAnswer] = useState<string>('');
-    const [success, setSuccess] = useState<string>('');
+    
     const [error, setError] = useState<string>('');
     const [submitted, setSubmitted] = useState<boolean>(false);
-    const { user, userData, loading } = useAuth();
+    const { userData } = useAuth();
     const { id } = useParams<{ id: string }>();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -22,11 +23,50 @@ const SubmitAssignment = () => {
                 time: Timestamp.now(),
             });
 
-            setSuccess('Your assignment has been submitted successfully!');
+            
             setSubmitted(true);
+            toast("Your assignment has been submitted successfully!", {
+                className: "bg-green-100 flex items-center",
+                duration: 5000,
+                icon: (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                ),
+              });
         } catch (err) {
             setError('Failed to submit the assignment. Please try again.');
-            console.error('Submission error:', err);
+            toast("Failed to submit the assignment. Please try again.", {
+                className: "bg-red-100 flex items-center",
+                duration: 5000,
+                icon: (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-4 h-4"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21 21 3 3M21 3 3 21"
+                        />
+                    </svg>
+                ),
+            });
         }
     };
     // check if the assignment has been submitted after the submission is successful
@@ -55,7 +95,7 @@ const SubmitAssignment = () => {
                 <ViewAssignmentDetails />
 
                 <h2 className="text-zinc-900 font-bold">Submit Assignment</h2>
-                {success && <p style={{ color: 'green' }}>{success}</p>}
+                
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 {!submitted ? (
                     <form onSubmit={handleSubmit}>
@@ -70,16 +110,15 @@ const SubmitAssignment = () => {
                             />
                             <button
                                 className="button border"
-                                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-                                    handleSubmit(e)
-                                }
+                                
+                                type='submit'
                             >
                                 Submit
                             </button>
                         </div>
                     </form>
                 ) : (
-                    <p>Your assignment has been submitted successfully!</p>
+                    <p className='text-green-700'>Your assignment has been submitted successfully!</p>
                 )}
             </div>
         </div>

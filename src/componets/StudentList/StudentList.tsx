@@ -1,8 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { onSnapshot, doc, collection, deleteDoc } from 'firebase/firestore';
 import { db } from '../../../firebase';
-import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 interface Student {
@@ -17,7 +16,7 @@ const StudentList = () => {
 
     const [studentList, setStudentList] = useState<Student[]>([]);
 
-    const { user, userData, loading } = useAuth();
+    const { userData } = useAuth();
     const role = userData?.role;
 
     useEffect(() => {
@@ -41,17 +40,6 @@ const StudentList = () => {
   return (
     <div className="grid justify-items-center grid-flow-row ">
       <h2 className="font-semibold py-6">StudentList</h2>
-      <div className="flex flex-row justify-between w-full px-5">
-        <div></div>
-        <div></div>
-        {role === "teacher" && (
-          <div className="">
-            <button className="button">
-              <Link to={"/register"}>New Student</Link>
-            </button>
-          </div>
-        )}
-      </div>
 
       <ul className="grid grid-cols-2 py-10 gap-10 max-breakPoint3:flex max-breakPoint3:flex-col  breakPoint2:grid-cols-3 ">
         {studentList.map((student) => (

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { p_assignment, p_exams } from "../../../../firebase";
 import { addDoc } from "firebase/firestore";
 import "./Publish.css";
+import { toast } from "sonner";
 
 export interface PublishDoc {
   id: "";
@@ -46,9 +47,47 @@ export default function Publish() {
       setSelectedOption("");
       setDueDateMonth("");
       setDueDateDay("");
-      console.log("Document successfully written!");
+      toast("Successfully published!", {
+        className: "bg-green-100 flex items-center",
+        duration: 5000,
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+        ),
+      });
     } catch (error) {
-      console.error("Error writing document: ", error);
+      toast("Error publishing!! Try again!", {
+        className: "bg-red-100 flex items-center",
+        duration: 5000,
+        icon: (
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-4 h-4"
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 21 3 3M21 3 3 21"
+                />
+            </svg>
+        ),
+    });
     }
   };
 
@@ -79,7 +118,9 @@ export default function Publish() {
               placeholder="Title"
               type="text"
               id="Title"
+              value={title}
               onChange={(e) => setTitle(e.target.value)}
+              required
             />
           </div>
 
@@ -88,17 +129,18 @@ export default function Publish() {
               <label
                 htmlFor="Assignments"
                 className="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
-                tabIndex="0"
+                tabIndex={0}
               >
                 <input
                   className="sr-only"
                   id="Assignments"
                   type="radio"
-                  tabIndex="-1"
+                  tabIndex={-1}
                   name="Assignments"
                   value="Assignment"
                   checked={selectedOption === "Assignment"}
                   onChange={onValueChange}
+                  
                 />
 
                 <span className="text-sm"> Assignments </span>
@@ -109,17 +151,18 @@ export default function Publish() {
               <label
                 htmlFor="exam"
                 className="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
-                tabIndex="0"
+                tabIndex={0}
               >
                 <input
                   className="sr-only"
                   id="exam"
                   type="radio"
-                  tabIndex="-1"
+                  tabIndex={-1}
                   name="exam"
                   value="Exam"
                   checked={selectedOption === "Exam"}
                   onChange={onValueChange}
+                  
                 />
 
                 <span className="text-sm"> Exam </span>
@@ -134,17 +177,19 @@ export default function Publish() {
             <textarea
               className="w-full rounded-lg border-gray-200 p-3 text-sm"
               placeholder="Information"
-              rows="8"
+              rows={8}
               id="Information"
+              value={information}
               onChange={(e) => setInformation(e.target.value)}
+              required
             ></textarea>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <span className="text-sm" htmlFor="DueDateMonth">
+            <span className="text-sm">
               Deadline (Month)
             </span>
-            <span className="text-sm" htmlFor="DueDateDay">
+            <span className="text-sm">
               Deadline (Day)
             </span>
             <div>
@@ -153,6 +198,7 @@ export default function Publish() {
                 id="DueDateMonth"
                 onChange={(e) => setDueDateMonth(e.target.value)}
                 value={dueDateMonth}
+                required
               >
                 <option value="">Select Month</option>
                 <option value="January">January</option>
@@ -176,6 +222,7 @@ export default function Publish() {
                 id="DueDateDay"
                 onChange={(e) => setDueDateDay(e.target.value)}
                 value={dueDateDay}
+                required
               >
                 <option value="">Select Day</option>
                 {[...Array(31)].map((_, index) => (

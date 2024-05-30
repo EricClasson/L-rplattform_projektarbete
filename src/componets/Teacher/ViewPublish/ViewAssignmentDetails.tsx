@@ -3,11 +3,16 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { db } from '../../../../firebase';
 
+interface AssignmentDetails {
+    title: string;
+    information: string;
+    date: string;
+}
 const ViewAssignmentDetails = () => {
     const { id } = useParams();
-    const [assignmentDetails, setAssignmentDetails] = useState<any>(null);
 
-    console.log('This is the assignment details', id);
+    const [assignmentDetails, setAssignmentDetails] = useState<AssignmentDetails | null>(null);
+
 
     useEffect(() => {
         if (id) {
@@ -15,9 +20,8 @@ const ViewAssignmentDetails = () => {
                 const docRef = doc(db, 'Assignments', id);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    const data = docSnap.data();
+                    const data = docSnap.data() as AssignmentDetails;
                     setAssignmentDetails(data);
-                    console.log('This is the data', data);
                 }
             };
             fetchData();

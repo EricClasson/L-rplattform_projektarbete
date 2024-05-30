@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { collection, getDocs, query, where } from "firebase/firestore"
+import { collection, getDocs, query } from "firebase/firestore"
 import { db } from "../../../../firebase"
 
 const ViewSubmissions = () => {
@@ -28,6 +28,7 @@ const ViewSubmissions = () => {
                 <p><strong>Answer:</strong> {submission.answer}</p>
             </li>
             ))}
+            {submissions.length === 0 && <p className="text-center">No submissions yet</p>}
         </ul>
     </div>
   )
