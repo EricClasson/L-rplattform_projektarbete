@@ -21,3 +21,9 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: larger;
 }
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 6.1rem);
+}
