@@ -52,7 +52,7 @@ export default function ViewExams() {
         {Assignments.map((index) => (
           <li
             key={index.id}
-            className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6 flex flex-col gap-4"
+            className="rounded-1g border-2 border-black bg-slate-300 p-4 shadow-sm transition hover:shadow-lg sm:p-6 flex flex-col gap-4"
           >
             {editId === index.id ? (
               <>
