@@ -28,7 +28,7 @@ function Logout() {
                             />
                         </svg>
                     ),
-                    position: 'top-right',
+                    position: 'top-center',
                 });
                 navigate('/');
             });
@@ -38,7 +38,7 @@ function Logout() {
     };
     return (
         <div className='center'>
-        <div className="flex flex-col p-6 items-center max-w-xl m-auto justify-center gap-4 border">
+        <div className="flex flex-col p-20 rounded-xl shadow-xl items-center m-auto justify-center gap-4 border">
             <h1 className=" text-xl font-semibold">Are you sure to sign out?</h1>
             <button onClick={userlogout} className="button">
                 SignOut

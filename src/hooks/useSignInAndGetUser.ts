@@ -34,6 +34,7 @@ const useSignInAndGetUser = () => {
           setUser(userData as User);
           setLoading(false);
           navigate("/dashboard/Publish", { state: { role: userData?.role } });
+          
         } else if (userData?.role === "student") {
           setUser(userData as User);
           setLoading(false);

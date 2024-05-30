@@ -66,6 +66,7 @@ export default function Publish() {
             />
           </svg>
         ),
+        position: 'top-center',
       });
     } catch (error) {
       toast("Error publishing!! Try again!", {
@@ -87,6 +88,7 @@ export default function Publish() {
                 />
             </svg>
         ),
+        position: 'top-center',
     });
     }
   };

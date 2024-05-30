@@ -44,6 +44,7 @@ const SubmitAssignment = () => {
                     />
                   </svg>
                 ),
+                position: 'top-center',
               });
         } catch (err) {
             setError('Failed to submit the assignment. Please try again.');
@@ -66,6 +67,7 @@ const SubmitAssignment = () => {
                         />
                     </svg>
                 ),
+                position: 'top-center',
             });
         }
     };
