@@ -28,6 +28,7 @@ function Logout() {
                             />
                         </svg>
                     ),
+                    position: 'top-right',
                 });
                 navigate('/');
             });
@@ -36,11 +37,14 @@ function Logout() {
         }
     };
     return (
-        <div className="flex flex-col items-center justify-center p-3 gap-2 shadow-md border">
-            <h1 className=" text-xl font-semibold">Sign Out Page</h1>
+        <div className='center'>
+        <div className="flex flex-col p-6 items-center max-w-xl m-auto justify-center gap-4 border">
+            <h1 className=" text-xl font-semibold">Are you sure to sign out?</h1>
             <button onClick={userlogout} className="button">
                 SignOut
             </button>
+        </div>
+
         </div>
     );
 }
