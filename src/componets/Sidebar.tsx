@@ -17,7 +17,7 @@ const Sidebar = (prop: Props) => {
   return (
     <div>
       {openMenu && (
-        <ul className="gap-12 bg-slate-300 px-4 h-full w-full breakPoint:hidden md:hidden max-breakPoint:absolute top-[6rem] flex flex-col items-center justify-center text-center">
+        <ul className="gap-12 bg-slate-300 overflow-y-auto px-4 max-breakPoint:h-screen w-full breakPoint:hidden md:hidden max-breakPoint:fixed top-[6rem] flex flex-col items-center justify-center text-center">
           {prop.role === "teacher" && (
             <li>
               <Link to={"/dashboard/Publish"}>
@@ -47,7 +47,7 @@ const Sidebar = (prop: Props) => {
           </li>
         </ul>
       )}
-      <div className="grid grid-row-4 sticky top-0 place-items-center h-screen max-breakPoint:h-20  max-breakPoint:py-12 max-breakPoint:px-4 max-breakPoint:flex max-breakPoint:justify-between border-r-2 py-5 bg-slate-300">
+      <div className="grid grid-row-4 max-breakPoint:w-full max-breakPoint:fixed max-breakPoint:top-0 sticky top-0 place-items-center h-screen max-breakPoint:h-20  max-breakPoint:py-12 max-breakPoint:px-4 max-breakPoint:flex max-breakPoint:justify-between border-r-2 py-5 bg-slate-300">
         <div className="grid row-span-1 border place-items-center btn-circle bg-slate-100 hover:bg-slate-200 w-20 h-20">
           <h2 className="text-black text-xl">
             {prop.role === "teacher" && "T"}
