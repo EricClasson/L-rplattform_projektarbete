@@ -7,20 +7,22 @@ import { Toaster } from 'sonner';
 import Publish from './componets/Teacher/Publish/Publish';
 import ViewExams from './componets/Teacher/ViewPublish/ViewExams';
 import ViewAssignments from './componets/Teacher/ViewPublish/ViewAssignments';
-import ViewExamsStudent from './componets/Student/ViewExams/ViewExamsStudent';
-import ViewAssignmentsStudent from './componets/Student/ViewAssingments/ViewAssignmentsStudent';
+import React, { Suspense } from 'react';
 import StudentList from './componets/StudentList/StudentList';
 import Logout from './componets/Logout';
 import ViewAssignmentDetails from './componets/Teacher/ViewPublish/ViewAssignmentDetails';
 import { AuthProvider } from './hooks/useAuth';
 import SubmitAssignment from './componets/Student/submissions/SubmitAssignment';
-import ViewSubmissions from './componets/Student/submissions/ViewSubmissions';
+import Loading from './loading';
+
 
 function App() {
+    const ViewSubmissionsComponent = React.lazy(() => import('./componets/Student/submissions/ViewSubmissions'));
     return (
         <>
             <Toaster />
             <AuthProvider>
+            <Suspense fallback={<Loading/>}>
                 <Routes>
                     <Route path="/" element={<Login />} />
                     <Route path="/register" element={<Register />} />
@@ -40,12 +42,13 @@ function App() {
                             path="/dashboard/SubmitAssignment/:id"
                             element={<SubmitAssignment />}
                         />
-                        <Route path='/dashboard/ViewSubmissions/:id' element={<ViewSubmissions />} />
+                        <Route path='/dashboard/ViewSubmissions/:id' element={<ViewSubmissionsComponent />} />
                         <Route path="/dashboard/GetExams" element={<ViewExams />} />
                         <Route path="/dashboard/GetStudents" element={<StudentList />} />
                         <Route path="/dashboard/Publish" element={<Publish />} />
                     </Route>
                 </Routes>
+            </Suspense>
             </AuthProvider>
         </>
     );

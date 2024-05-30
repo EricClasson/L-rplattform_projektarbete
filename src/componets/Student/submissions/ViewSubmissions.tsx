@@ -22,8 +22,10 @@ const ViewSubmissions = () => {
         }
         getSubmissions()
     }, [id])
+    
   return (
     <div>
+        {loading && <h1>Loading...</h1>}
         <h1 className="text-zinc-900 font-bold text-center">Submissions</h1>
         <ul>
             {submissions.map((submission, index) => (
@@ -37,5 +39,5 @@ const ViewSubmissions = () => {
   )
 }
 
-export default withLoading(ViewSubmissions)
+export default ViewSubmissions
 
