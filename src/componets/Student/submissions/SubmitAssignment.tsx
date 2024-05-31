@@ -23,11 +23,10 @@ const SubmitAssignment = () => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    const user = window.localStorage.getItem("user");
-    if (!user) {
+    if (!userData ) {
       navigate("/");
     }
-  }, []);
+  }, [userData, id]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

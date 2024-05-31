@@ -21,11 +21,10 @@ const StudentList = () => {
   const role = userData?.role;
 
   useEffect(() => {
-    const user = window.localStorage.getItem("user");
-    if (!user) {
+    if (!userData) {
       navigate("/");
     }
-  }, []);
+  }, [userData]);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "users"), (snapshot) => {

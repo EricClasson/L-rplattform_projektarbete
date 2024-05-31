@@ -3,17 +3,17 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { PiEmptyDuotone } from "react-icons/pi";
+import { useAuth } from "../../../hooks/useAuth";
 const ViewSubmissions = () => {
   const { id } = useParams<{ id: string }>();
   const [submissions, setSubmissions] = useState<any[]>([]);
   const navigate = useNavigate();
-
+  const { userData } = useAuth();
   useEffect(() => {
-    const user = window.localStorage.getItem("user");
-    if (!user) {
+    if (!userData) {
       navigate("/");
     }
-  }, []);
+  }, [userData]);
 
   useEffect(() => {
     const getSubmissions = async () => {

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../../../../firebase";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../../../hooks/useAuth";
 interface AssignmentDetails {
   title: string;
   information: string;
@@ -12,16 +12,16 @@ interface AssignmentDetails {
 const ViewAssignmentDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const { userData } = useAuth();
   const [assignmentDetails, setAssignmentDetails] =
     useState<AssignmentDetails | null>(null);
 
   useEffect(() => {
-    const user = window.localStorage.getItem("user");
-    if (!user) {
+    
+    if (!userData) {
       navigate("/");
     }
-  }, []);
+  }, [userData]);
 
   useEffect(() => {
     if (id) {

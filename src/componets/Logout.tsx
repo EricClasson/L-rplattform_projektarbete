@@ -2,10 +2,17 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-
+import { useAuth } from "../hooks/useAuth";
+import { useEffect } from "react";
 function Logout() {
   const navigate = useNavigate();
+  const { userData } = useAuth();
 
+  useEffect(() => {
+    if (!userData) {
+      navigate("/");
+    }
+  }, [userData])
   const userlogout = async () => {
     try {
       await signOut(auth).then(() => {

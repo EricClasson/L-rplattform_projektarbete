@@ -12,7 +12,7 @@ const Dashboard = () => {
     if (!userData) {
       navigate("/");
     }
-  }, []);
+  }, [userData]);
 
   return (
     <div>

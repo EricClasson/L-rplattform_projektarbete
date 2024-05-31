@@ -20,11 +20,11 @@ export default function ViewExams() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = window.localStorage.getItem("user");
-    if (!user) {
+    
+    if (!userData) {
       navigate("/");
     }
-  }, []);
+  }, [userData]);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "p_Exams"), (snapshot) => {
@@ -78,7 +78,7 @@ export default function ViewExams() {
                 <textarea
                   className="input border border-black"
                   placeholder="Information"
-                  rows="8"
+                  rows={8}
                   value={informationChange}
                   onChange={(e) => setInformationChange(e.target.value)}
                 ></textarea>

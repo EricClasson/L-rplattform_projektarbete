@@ -21,11 +21,11 @@ export default function ViewAssignments() {
   const role = userData?.role;
 
   useEffect(() => {
-    const user = window.localStorage.getItem("user");
-    if (!user) {
+    
+    if (!userData) {
       navigate("/");
     }
-  }, []);
+  }, [userData]);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "Assignments"), (snapshot) => {

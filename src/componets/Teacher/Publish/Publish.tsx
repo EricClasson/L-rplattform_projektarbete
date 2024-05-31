@@ -4,7 +4,7 @@ import { addDoc } from "firebase/firestore";
 import "./Publish.css";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../../../hooks/useAuth";
 export interface PublishDoc {
   id: "";
   title: string;
@@ -21,17 +21,17 @@ export default function Publish() {
   const [dueDateMonth, setDueDateMonth] = useState<string>("");
   const [dueDateDay, setDueDateDay] = useState<string>("");
   const navigate = useNavigate();
-
+  const { userData } = useAuth();
   function onValueChange(e: React.FormEvent<HTMLInputElement>) {
     setSelectedOption(e.currentTarget.value);
   }
 
   useEffect(() => {
-    const user = window.localStorage.getItem("user");
-    if (!user) {
+    
+    if (!userData) {
       navigate("/");
     }
-  }, []);
+  }, [userData]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

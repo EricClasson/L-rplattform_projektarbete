@@ -1,10 +1,10 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
-
+import { GoArrowRight } from "react-icons/go";
 interface FormData {
   email: string;
   password: string;
@@ -24,7 +24,8 @@ function Register() {
 
   const auth = getAuth();
   const navigate = useNavigate();
-
+  
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -150,6 +151,12 @@ function Register() {
           Register
         </button>
         {error && <p className="text-red-600">{error}</p>}
+        <Link to={"/"}>
+          <p className="text-zinc-900">Already have an account? 
+          <GoArrowRight className="inline-block m-4" />
+          <strong>Login</strong>
+          </p>
+        </Link>
       </div>
     </div>
   );

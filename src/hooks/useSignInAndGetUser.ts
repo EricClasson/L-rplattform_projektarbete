@@ -29,9 +29,7 @@ const useSignInAndGetUser = () => {
         // Get user data
         const userDoc = await getDoc(doc(usersCollection, loggedInUser?.uid));
         const userData = userDoc.data();
-        console.log(userData);
-        window.localStorage.setItem("user", userData);
-
+        
         if (userData?.role === "teacher") {
           setUser(userData as User);
           setLoading(false);
