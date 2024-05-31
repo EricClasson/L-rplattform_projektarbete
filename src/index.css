@@ -27,3 +27,6 @@ body {
   align-items: center;
   height: calc(100vh - 6.1rem);
 }
+.buttonRed {
+  @apply bg-red-700 text-white p-2 rounded-md hover:bg-red-500;
+}

@@ -20,7 +20,10 @@ const Sidebar = (prop: Props) => {
         <ul className="gap-12 z-10 bg-slate-300 overflow-y-auto px-4 max-breakPoint:h-screen w-full breakPoint:hidden md:hidden max-breakPoint:fixed top-[6rem] flex flex-col items-center justify-center text-center">
           {prop.role === "teacher" && (
             <li>
-              <Link to={"/dashboard/Publish"}>
+              <Link
+                onClick={() => setOpenMenu((prev) => !prev)}
+                to={"/dashboard/Publish"}
+              >
                 <TbArrowBigUpLines className="btn btn-square bg-slate-100 p-4" />
                 <p>Publish</p>
               </Link>
@@ -28,19 +31,28 @@ const Sidebar = (prop: Props) => {
           )}
 
           <li className="">
-            <Link to={"/dashboard/GetAssignments"}>
+            <Link
+              onClick={() => setOpenMenu((prev) => !prev)}
+              to={"/dashboard/GetAssignments"}
+            >
               <IoBookSharp className="btn btn-square bg-slate-100 p-4" />
               <p>Assignments</p>
             </Link>
           </li>
           <li className="">
-            <Link to={"/dashboard/GetExams"}>
+            <Link
+              onClick={() => setOpenMenu((prev) => !prev)}
+              to={"/dashboard/GetExams"}
+            >
               <FaPen className="btn btn-square bg-slate-100 p-4" />
               <p>Exams</p>
             </Link>
           </li>
           <li className="">
-            <Link to={"/dashboard/GetStudents"}>
+            <Link
+              onClick={() => setOpenMenu((prev) => !prev)}
+              to={"/dashboard/GetStudents"}
+            >
               <IoPeopleOutline className="btn btn-square bg-slate-100 p-4" />
               <p>Students</p>
             </Link>

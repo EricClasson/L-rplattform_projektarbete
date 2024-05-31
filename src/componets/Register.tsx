@@ -3,10 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { db } from "../../firebase";
-import {
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 interface FormData {
   email: string;
@@ -39,13 +36,13 @@ function Register() {
   const handleRegister = async () => {
     try {
       const userCredentials = await createUserWithEmailAndPassword(
-          auth,
-          formData.email,
-          formData.password
+        auth,
+        formData.email,
+        formData.password
       );
 
       const user = userCredentials.user;
-    
+
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         firstname: formData.firstname,
@@ -80,30 +77,32 @@ function Register() {
             />
           </svg>
         ),
+        position: "top-right",
       });
 
       navigate("/dashboard");
     } catch (error) {
-        toast("Error creating the user!", {
-            className: "bg-red-100 flex items-center",
-            duration: 5000,
-            icon: (
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-4 h-4"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M21 21 3 3M21 3 3 21"
-                    />
-                </svg>
-            ),
-        });
+      toast("Error creating the user!", {
+        className: "bg-red-100 flex items-center",
+        duration: 5000,
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21 3 3M21 3 3 21"
+            />
+          </svg>
+        ),
+        position: "top-right",
+      });
       setError("Error creating the user");
     }
   };

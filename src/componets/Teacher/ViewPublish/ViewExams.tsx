@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import {
   collection,
@@ -10,12 +9,23 @@ import {
 import { db } from "../../../../firebase";
 import { PublishDoc } from "../Publish/Publish";
 import { useAuth } from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 export default function ViewExams() {
   const [Assignments, setAssignment] = useState<PublishDoc[]>([]);
   const [editId, setEditId] = useState<string | null>(null);
   const [titleChange, setTitleChange] = useState<string>("");
   const [informationChange, setInformationChange] = useState<string>("");
   const { userData } = useAuth();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = window.localStorage.getItem("user");
+    if (!user) {
+      navigate("/");
+    }
+  }, []);
+
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "p_Exams"), (snapshot) => {
       const Publish: PublishDoc[] = snapshot.docs.map((doc) => ({
@@ -92,9 +102,11 @@ export default function ViewExams() {
                       </p>
                     </div>
                     <div className="flex flex-row gap-1">
-                      <p className="text-xs"> Deadline: </p>
+                      <p className="text-xs"> Exam date: </p>
                       <p className="text-xs font-semibold ">
-                        {index.dueDate ? index.dueDate.slice(0, 10) : "No Deadline"}
+                        {index.dueDate
+                          ? index.dueDate.slice(0, 10)
+                          : "No Deadline"}
                       </p>
                     </div>
                   </div>
@@ -112,13 +124,14 @@ export default function ViewExams() {
               </>
             )}
             <div className="flex flex-row gap-5">
-              { userData.role === "teacher" && 
+              {userData.role === "teacher" && (
                 <button
-                onClick={() => handleDelete(index.id)}
-                className="button py-5"
-              >
-                Delete
-              </button>}
+                  onClick={() => handleDelete(index.id)}
+                  className="buttonRed py-5"
+                >
+                  Delete
+                </button>
+              )}
               {editId !== index.id && userData.role === "teacher" && (
                 <button
                   className="buttonTeal w-16"

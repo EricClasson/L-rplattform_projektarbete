@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   collection,
   onSnapshot,
@@ -15,9 +16,16 @@ export default function ViewAssignments() {
   const [editId, setEditId] = useState<string | null>(null);
   const [titleChange, setTitleChange] = useState<string>("");
   const [informationChange, setInformationChange] = useState<string>("");
-
+  const navigate = useNavigate();
   const { userData } = useAuth();
   const role = userData?.role;
+
+  useEffect(() => {
+    const user = window.localStorage.getItem("user");
+    if (!user) {
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "Assignments"), (snapshot) => {
@@ -119,7 +127,7 @@ export default function ViewAssignments() {
               {role === "teacher" && (
                 <button
                   onClick={() => handleDelete(index.id)}
-                  className="button py-5"
+                  className="buttonRed py-5"
                 >
                   Delete
                 </button>

@@ -1,9 +1,9 @@
-
-import { useState, useEffect } from 'react';
-import { onSnapshot, doc, collection, deleteDoc } from 'firebase/firestore';
-import { db } from '../../../firebase';
-import { useAuth } from '../../hooks/useAuth';
-import { toast } from 'sonner';
+import { useState, useEffect } from "react";
+import { onSnapshot, doc, collection, deleteDoc } from "firebase/firestore";
+import { db } from "../../../firebase";
+import { useAuth } from "../../hooks/useAuth";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 interface Student {
   id: string;
@@ -14,50 +14,56 @@ interface Student {
 }
 
 const StudentList = () => {
+  const [studentList, setStudentList] = useState<Student[]>([]);
+  const navigate = useNavigate();
 
-    const [studentList, setStudentList] = useState<Student[]>([]);
+  const { userData } = useAuth();
+  const role = userData?.role;
 
-    const { userData } = useAuth();
-    const role = userData?.role;
+  useEffect(() => {
+    const user = window.localStorage.getItem("user");
+    if (!user) {
+      navigate("/");
+    }
+  }, []);
 
-    useEffect(() => {
-        const unsub = onSnapshot(collection(db, 'users'), (snapshot) => {
-            const list: Student[] = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            })) as Student[];
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
+      const list: Student[] = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Student[];
 
-            const result = list.filter((student) => student.role === 'student');
-            setStudentList(result);
-        });
-        return () => unsub();
-    }, []);
+      const result = list.filter((student) => student.role === "student");
+      setStudentList(result);
+    });
+    return () => unsub();
+  }, []);
 
-
-    const handleDelete = async (id: string) => {
-        await deleteDoc(doc(db, 'users', id));
-        toast("Successfully deleted the student!", {
-          className: "bg-green-100 flex items-center",
-          duration: 5000,
-          icon: (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-          ),
-          position: 'top-center',
-        });
-    };
+  const handleDelete = async (id: string) => {
+    await deleteDoc(doc(db, "users", id));
+    toast("Successfully deleted the student!", {
+      className: "bg-green-100 flex items-center",
+      duration: 5000,
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+      ),
+      position: "top-right",
+    });
+  };
 
   return (
     <div className="grid justify-items-center grid-flow-row ">
@@ -82,7 +88,7 @@ const StudentList = () => {
                 {role === "teacher" && (
                   <div className="card-actions">
                     <button
-                      className="button"
+                      className="buttonRed"
                       onClick={() => handleDelete(student.id)}
                     >
                       Remove

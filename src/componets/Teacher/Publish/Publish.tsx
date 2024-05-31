@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { p_assignment, p_exams } from "../../../../firebase";
 import { addDoc } from "firebase/firestore";
 import "./Publish.css";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export interface PublishDoc {
   id: "";
@@ -19,10 +20,18 @@ export default function Publish() {
   const [selectedOption, setSelectedOption] = useState("");
   const [dueDateMonth, setDueDateMonth] = useState<string>("");
   const [dueDateDay, setDueDateDay] = useState<string>("");
+  const navigate = useNavigate();
 
   function onValueChange(e: React.FormEvent<HTMLInputElement>) {
     setSelectedOption(e.currentTarget.value);
   }
+
+  useEffect(() => {
+    const user = window.localStorage.getItem("user");
+    if (!user) {
+      navigate("/");
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,30 +75,30 @@ export default function Publish() {
             />
           </svg>
         ),
-        position: 'top-center',
+        position: "top-right",
       });
     } catch (error) {
       toast("Error publishing!! Try again!", {
         className: "bg-red-100 flex items-center",
         duration: 5000,
         icon: (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4"
-            >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21 3 3M21 3 3 21"
-                />
-            </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21 3 3M21 3 3 21"
+            />
+          </svg>
         ),
-        position: 'top-center',
-    });
+        position: "top-right",
+      });
     }
   };
 
@@ -142,7 +151,6 @@ export default function Publish() {
                   value="Assignment"
                   checked={selectedOption === "Assignment"}
                   onChange={onValueChange}
-                  
                 />
 
                 <span className="text-sm"> Assignments </span>
@@ -164,7 +172,6 @@ export default function Publish() {
                   value="Exam"
                   checked={selectedOption === "Exam"}
                   onChange={onValueChange}
-                  
                 />
 
                 <span className="text-sm"> Exam </span>
@@ -189,10 +196,10 @@ export default function Publish() {
 
           <div className="grid grid-cols-2 gap-4">
             <span className="text-sm">
-              Deadline (Month)
+              {selectedOption === "Exam" ? "Date" : "Deadline"} (Month)
             </span>
             <span className="text-sm">
-              Deadline (Day)
+              {selectedOption === "Exam" ? "Date" : "Deadline"} (Day)
             </span>
             <div>
               <select
@@ -239,9 +246,9 @@ export default function Publish() {
           <div className="mt-4">
             <button
               type="submit"
-              className="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
+              className="buttonGreen inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
             >
-              Submit
+              Publish
             </button>
           </div>
         </form>
