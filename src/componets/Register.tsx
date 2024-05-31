@@ -24,8 +24,7 @@ function Register() {
 
   const auth = getAuth();
   const navigate = useNavigate();
-  
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -81,7 +80,7 @@ function Register() {
         position: "top-right",
       });
 
-      navigate("/dashboard");
+      navigate("/dashboard/GetAssignments");
     } catch (error) {
       toast("Error creating the user!", {
         className: "bg-red-100 flex items-center",
@@ -152,9 +151,10 @@ function Register() {
         </button>
         {error && <p className="text-red-600">{error}</p>}
         <Link to={"/"}>
-          <p className="text-zinc-900">Already have an account? 
-          <GoArrowRight className="inline-block m-4" />
-          <strong>Login</strong>
+          <p className="text-zinc-900">
+            Already have an account?
+            <GoArrowRight className="inline-block m-4" />
+            <strong>Login</strong>
           </p>
         </Link>
       </div>
