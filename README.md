@@ -3,6 +3,10 @@
 ## Om projektet
 
 Syftet med denna gruppuppgift är att skapa ett fungerande CMS (Content Management System) med hjälp av TypeScript, React och Firebase. Det ska ha ett användarvänligt gränssnitt och funktioner för att skapa, redigera och ta bort innehåll.
+# Inloggning
+Lärarekonto:
+email: teacher@example.com / lösenord: 123456789
+Studentkonto: student@example.com / lösenord: 123456789
 
 ### Built With
 
